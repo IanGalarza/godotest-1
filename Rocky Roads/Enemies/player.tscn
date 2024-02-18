@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2xgejg770fdl"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_eu1ma"]
+[ext_resource type="Texture2D" uid="uid://bqx8dqqdgec4h" path="res://Rocky Roads/Enemies/slime_blue.png" id="1_tlwe1"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ulkjd"]
+
+[sub_resource type="Animation" id="Animation_ldcmx"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fhnmb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5drj2"]
+resource_name = "Walk"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b4l8c"]
+_data = {
+"RESET": SubResource("Animation_fhnmb"),
+"Walk": SubResource("Animation_5drj2"),
+"idle": SubResource("Animation_ldcmx")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2qk3"]
+size = Vector2(15, 10)
+
+[node name="player" type="Node2D"]
+script = ExtResource("1_ulkjd")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_eu1ma")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-2.5, -0.5)
+scale = Vector2(0.9375, 1.03125)
+texture = ExtResource("1_tlwe1")
+hframes = 5
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_b4l8c")
+}
+speed_scale = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-2.5, 3)
+shape = SubResource("RectangleShape2D_i2qk3")

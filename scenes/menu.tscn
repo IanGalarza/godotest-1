@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0bwvfryh230d"]
+
+[ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_a8y1v"]
+[ext_resource type="Texture2D" uid="uid://c7fmi0ns28qi4" path="res://raf,750x1000,075,t,fafafa ca443f4786.jpg" id="2_8c54t"]
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a8y1v")
+
+[node name="Raf,750x1000,075,t,fafafaCa443f4786" type="Sprite2D" parent="."]
+position = Vector2(12, -52)
+scale = Vector2(2.27467, 1)
+texture = ExtResource("2_8c54t")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start game"
+
+[node name="LevelButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Select Level"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit game"
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LevelButton" to="." method="_on_level_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

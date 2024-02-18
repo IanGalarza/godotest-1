@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv7i27ppisp3j"]
+
+[ext_resource type="Script" path="res://Scripts/LevelMenu.gd" id="1_h5o5u"]
+[ext_resource type="Texture2D" uid="uid://c7fmi0ns28qi4" path="res://raf,750x1000,075,t,fafafa ca443f4786.jpg" id="2_kkw0m"]
+
+[node name="LevelMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h5o5u")
+
+[node name="Raf,750x1000,075,t,fafafaCa443f4786" type="Sprite2D" parent="."]
+position = Vector2(12, -52)
+scale = Vector2(2.27467, 1)
+texture = ExtResource("2_kkw0m")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Level1" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="Level2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 2"
+
+[node name="Level3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 3"
+
+[node name="Level4" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 4"
+
+[node name="Level5" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 5"
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Back To Menu"
+
+[connection signal="pressed" from="VBoxContainer/Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/Level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/Level4" to="." method="_on_level_4_pressed"]
+[connection signal="pressed" from="VBoxContainer/Level5" to="." method="_on_level_5_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

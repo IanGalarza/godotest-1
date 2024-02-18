@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3 uid="uid://du375sal7npm8"]
+
+[ext_resource type="Script" path="res://Scripts/AnimatedSaw.gd" id="1_ijxaf"]
+[ext_resource type="Texture2D" uid="uid://dkh7mvvm34gf1" path="res://Rocky Roads/Enemies/saw.png" id="1_uicbi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_on4l0"]
+size = Vector2(1, 20)
+
+[sub_resource type="Animation" id="Animation_ki5b1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Saw/CollisionPolygon2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_hsqja"]
+resource_name = "SawRot"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Saw/CollisionPolygon2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eyd3q"]
+_data = {
+"RESET": SubResource("Animation_ki5b1"),
+"SawRot": SubResource("Animation_hsqja")
+}
+
+[node name="AnimatedSaw" type="AnimatableBody2D"]
+script = ExtResource("1_ijxaf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uicbi")
+hframes = 2
+vframes = 2
+
+[node name="Saw" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Saw"]
+position = Vector2(0, -1)
+build_mode = 1
+polygon = PackedVector2Array(3, -10, 4, -8, 11, -10, 10, -2, 16, 1, 9, 5, 11, 12, 4, 10, 0, 17, -3, 11, -11, 12, -9, 5, -17, 1, -10.4863, -3.87781, -12.2449, -10.7267, -3, -9, 0, -16)
+
+[node name="LeftSensor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSensor"]
+position = Vector2(-16, 0)
+shape = SubResource("RectangleShape2D_on4l0")
+
+[node name="RightSensor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightSensor"]
+position = Vector2(17, 0)
+shape = SubResource("RectangleShape2D_on4l0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eyd3q")
+}
+
+[connection signal="body_entered" from="Saw" to="." method="_on_saw_body_entered"]
+[connection signal="body_entered" from="LeftSensor" to="." method="_on_left_sensor_body_entered"]
+[connection signal="body_entered" from="RightSensor" to="." method="_on_right_sensor_body_entered"]
